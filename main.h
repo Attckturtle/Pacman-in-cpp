@@ -10,9 +10,17 @@
 void update();
 void clearScreen();
 
+enum Move {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
 enum Type {
 	EMPTY,
-	WALL,
+	VWALL,
+	HWALL,
 	TP,
 	PACMAN,
 	GHOST,
