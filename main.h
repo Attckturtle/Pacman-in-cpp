@@ -7,6 +7,8 @@
 #include<ctime>
 #include<cstdlib>
 
+#include"Pos.h"
+
 void update();
 void clearScreen();
 
@@ -28,16 +30,12 @@ enum Type {
 	FRUIT
 };
 
-struct Pos {
-	int x, y;
-};
+extern const int boxHeight,boxWidth;
 
-extern const int boxHeight = 50, boxWidth = 50;
+extern int score;
 
-int score;
+extern int box[50][50];
 
-int box[boxWidth][boxHeight];
+extern Pos pacman;
 
-Pos pacman;
-
-char lastKey;
+extern char lastKey;

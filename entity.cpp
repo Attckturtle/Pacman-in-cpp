@@ -75,7 +75,14 @@ void entity::move() {
 		this->move();
 	}
 }
-
+/*
 bool entity::detect() {
-	if (box[this->pos.x][this->pos.y] == )
-}
+	for (int i = pos.x - 5; i < pos.x + 5; i++) {
+		for (int j = pos.y - 5; j < pos.y + 5; j++) {
+			if (box[i][j] == Type::PACMAN) {
+
+			}
+		}
+	}
+	//if (box[this->pos.x][this->pos.y] == )
+}*/

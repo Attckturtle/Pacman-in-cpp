@@ -1,5 +1,10 @@
 #include "main.h"
 
+Pos pacman;
+
+char lastKey;
+
+
 void update() {
 	if (_kbhit()) {
 		switch (_getch()) {
@@ -39,4 +44,9 @@ void update() {
 		pacman.x += 1;
 		break;
 	}
+	for (int i = 0; i < boxHeight; i++)
+		for (int j = 0; j < boxWidth; j++)
+			if (box[i][j] == Type::PACMAN) box[i][j] = Type::EMPTY;
+
+	box[pacman.y][pacman.x] = Type::PACMAN;
 }
