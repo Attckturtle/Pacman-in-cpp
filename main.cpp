@@ -1,7 +1,7 @@
 #include "main.h"
 #include "entity.h"
-const int boxHeight = 50;
-const int boxWidth = 50;
+const int boxHeight = 25;
+const int boxWidth = 25;
 int box[boxWidth][boxHeight];
 bool dead = false;
 
@@ -17,33 +17,25 @@ void clearScreen()
 
 void draw() {
 	clearScreen();
-	for (int i = 0; i < boxWidth; i++) {
-		for (int j = 0; j < boxHeight; j++) {
-			switch (box[i][j]) {
-			case Type::FRUIT:
-				std::cout << "F";
-				break;
-			case Type::GHOST:
-				std::cout << "G";
-				break;
-			case Type::PACMAN:
-				std::cout << "P";
-				break;
-			case Type::PELLET:
-				std::cout << "O";
-				break;
-			case Type::VWALL:
-				std::cout << "|";
-				break;
-			case Type::HWALL:
-				std::cout << "-";
-				break;
-			default:
-				std::cout << " ";
-					
+	for(int j = 0; j < boxWidth + 2; j++) std::cout << "||";
+
+	for (int i = 0; i < boxHeight; i++) {
+		std::cout << "\n||";
+		for (int j = 0; j < boxWidth; j++) {
+			bool isPacman = false;
+
+			if (!isPacman) {
+				if (pacman.x == j && pacman.y == i) std::cout << "PP";
+				else if (box[i][j] == Type::VWALL) std::cout << "||";
+				else if (box[i][j] == Type::HWALL) std::cout << "--";
+				else std::cout << "  ";
 			}
 		}
+		std::cout << "||";
 	}
+
+	std::cout << "\n";
+	for (int j = 0; j < boxWidth + 2; j++) std::cout << "||";
 }
 
 int main() {
@@ -63,6 +55,6 @@ int main() {
 				}
 			}
 		}
-		Sleep(1000);
+		Sleep(100);
 	}
 }
