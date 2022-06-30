@@ -34,7 +34,7 @@ extern const int boxHeight,boxWidth;
 
 extern int score;
 
-extern int box[25][25];
+extern int box[35][35];
 
 extern Pos pacman;
 

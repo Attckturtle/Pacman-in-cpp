@@ -49,4 +49,6 @@ void update() {
 			if (box[i][j] == Type::PACMAN) box[i][j] = Type::EMPTY;
 
 	box[pacman.y][pacman.x] = Type::PACMAN;
+	if (box[pacman.y][pacman.x] == Type::PELLET) score++;
+	else if (box[pacman.y][pacman.x] == Type::FRUIT) score+20;
 }

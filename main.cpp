@@ -1,7 +1,7 @@
 #include "main.h"
 #include "entity.h"
-const int boxHeight = 25;
-const int boxWidth = 25;
+const int boxHeight = 35;
+const int boxWidth = 35;
 int box[boxWidth][boxHeight];
 bool dead = false;
 

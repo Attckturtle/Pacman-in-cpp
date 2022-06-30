@@ -75,14 +75,24 @@ void entity::move() {
 		this->move();
 	}
 }
-/*
+
 bool entity::detect() {
 	for (int i = pos.x - 5; i < pos.x + 5; i++) {
 		for (int j = pos.y - 5; j < pos.y + 5; j++) {
+			viewRange[j][i] = box[j][i];
 			if (box[i][j] == Type::PACMAN) {
-
+				detected = true;
+				if (pacman.eat) {
+					runAway();
+				}
+			}
+			else {
+				detected = false;
 			}
 		}
 	}
-	//if (box[this->pos.x][this->pos.y] == )
-}*/
+}
+
+void entity::runAway() {
+	
+}
