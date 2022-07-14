@@ -6,6 +6,7 @@
 #include<Windows.h>
 #include<ctime>
 #include<cstdlib>
+#include<thread>
 
 #include"Pos.h"
 
@@ -34,7 +35,7 @@ extern const int boxHeight,boxWidth;
 
 extern int score;
 
-extern int box[35][35];
+extern int box[30][30];
 
 extern Pos pacman;
 

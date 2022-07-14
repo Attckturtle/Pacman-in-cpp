@@ -11,9 +11,8 @@ public:
 	entity(Type type, Pos pos);
 	void death();
 	void end();
-	void move();
+	void move(bool runOrNo);
 	bool onCollisionCourse();
-	bool detect();
-	void runAway();
+	void detect();
 };
 

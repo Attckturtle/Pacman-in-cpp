@@ -1,9 +1,10 @@
 #include "main.h"
 #include "entity.h"
-const int boxHeight = 35;
-const int boxWidth = 35;
+const int boxHeight = 30;
+const int boxWidth = 30;
 int box[boxWidth][boxHeight];
 bool dead = false;
+int score = 0;
 
 void generateWalls() {
 
@@ -41,15 +42,33 @@ void draw() {
 int main() {
 	pacman = { rand() % boxWidth, rand() % boxHeight };
 	for (int i = 0; i < boxWidth; i++)
-		for (int j = 0; j < boxHeight; j++)
-			box[boxWidth - 1][boxHeight - 1] = Type::EMPTY;
+		for (int j = 0; j < boxHeight; j++) {
+			int Vwall = rand() % 10 + 1;
+			int Hwall = rand() % 10 + 1;
+			if (Hwall == Vwall) {
+				if (Vwall < 10) {
+					Vwall++;
+				}
+				else {
+					Vwall--;
+				}
+			}
+			 
+			if (Vwall == 5) {
+				box[i][j] = Type::VWALL;
+			}
+			else if (Hwall == 5) {
+				box[i][j] = Type::HWALL;
+			}
+				box[boxWidth - 1][boxHeight - 1] = Type::EMPTY;
+		}
 
 	while (!dead) {
 		update();
 		draw();
 		for (int i = 0; i < boxWidth; i++) {
 			for (int j = 0; j < boxHeight; j++) {
-				if (box[i][j] == Type::PACMAN && box[i][j] == Type::GHOST) {
+				if ((box[i][j] == Type::PACMAN && box[i][j] == Type::GHOST) || (box[i][j] == Type::PACMAN && box[i][j] == Type::HWALL) || (box[i][j] == Type::PACMAN && box[i][j] == Type::VWALL)) {
 					dead = true;
 					break;
 				}

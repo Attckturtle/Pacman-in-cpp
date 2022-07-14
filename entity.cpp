@@ -40,50 +40,68 @@ bool entity::onCollisionCourse() {
 	}
 }
 
-void entity::move() {
-	if (onCollisionCourse()) {
-		if (box[pos.x++][pos.y] != Type::VWALL && box[pos.x++][pos.y] != Type::HWALL) {
-			nextMove = Move::RIGHT;
+void entity::move(bool runOrNo) {
+	if (!runOrNo) {
+		if (onCollisionCourse()) {
+			if (box[pos.x++][pos.y] != Type::VWALL && box[pos.x++][pos.y] != Type::HWALL) {
+				nextMove = Move::RIGHT;
+			}
+			else if (box[pos.x--][pos.y] != Type::VWALL && box[pos.x--][pos.y] != Type::HWALL) {
+				nextMove = Move::LEFT;
+			}
+			else if (box[pos.x][pos.y++] != Type::VWALL && box[pos.x][pos.y++] != Type::HWALL) {
+				nextMove = Move::DOWN;
+			}
+			else if (box[pos.x][pos.y--] != Type::VWALL && box[pos.x][pos.y--] != Type::HWALL) {
+				nextMove = Move::UP;
+			}
 		}
-		else if (box[pos.x--][pos.y] != Type::VWALL && box[pos.x--][pos.y] != Type::HWALL) {
-			nextMove = Move::LEFT;
+		if (nextMove != NULL && !onCollisionCourse()) {
+			switch (nextMove) {
+			case UP:
+				pos.y--;
+				break;
+			case DOWN:
+				pos.y++;
+				break;
+			case LEFT:
+				pos.x--;
+				break;
+			case RIGHT:
+				pos.x++;
+				break;
+			}
 		}
-		else if (box[pos.x][pos.y++] != Type::VWALL && box[pos.x][pos.y++] != Type::HWALL) {
-			nextMove = Move::DOWN;
-		}
-		else if (box[pos.x][pos.y--] != Type::VWALL && box[pos.x][pos.y--] != Type::HWALL) {
-			nextMove = Move::UP;
-		}
-	}
-	if (nextMove != NULL && !onCollisionCourse()) {
-		switch (nextMove) {
-		case UP:
-			pos.y--;
-			break;
-		case DOWN:
-			pos.y++;
-			break;
-		case LEFT:
-			pos.x--;
-			break;
-		case RIGHT:
-			pos.x++;
-			break;
+		else {
+			this->move(runOrNo);
 		}
 	}
 	else {
-		this->move();
+		switch (lastKey) {
+		case 'w':
+			pos.y++;
+			break;
+		case 'a':
+			pos.x++;
+			break;
+		case 's':
+			pos.y--;
+			break;
+		case 'd':
+			pos.x--;
+			break;
+		}
 	}
 }
 
-bool entity::detect() {
+void entity::detect() {
 	for (int i = pos.x - 5; i < pos.x + 5; i++) {
 		for (int j = pos.y - 5; j < pos.y + 5; j++) {
 			viewRange[j][i] = box[j][i];
 			if (box[i][j] == Type::PACMAN) {
 				detected = true;
 				if (pacman.eat) {
-					runAway();
+					this->move(true);
 				}
 			}
 			else {
@@ -93,6 +111,18 @@ bool entity::detect() {
 	}
 }
 
-void entity::runAway() {
-	
+/*
+void entity::runAway(int locationX, int locationY) {
+	switch (lastKey) {
+	case 'w':
+
+		break;
+	case 'a':
+		break;
+	case 's':
+		break;
+	case 'd':
+		break;
+	}
 }
+*/
