@@ -1,12 +1,14 @@
 #pragma once
 #include "main.h"
+#include "pathfinding.h"
 class entity
 {
 	Type type;
 	Pos pos;
 	Move nextMove;
 	bool detected;
-	int viewRange[5][5];
+	Type viewRange[5][5];
+	pathfinding mapFromEntity[30][30];
 public:
 	entity(Type type, Pos pos);
 	void death();
